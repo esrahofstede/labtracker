@@ -22,8 +22,11 @@ namespace Labtracker.Models
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
+        {}
+
+        public DbSet<Assignment> Assignments { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserAssignment> UserAssignments { get; set; }
 
         public static ApplicationDbContext Create()
         {
