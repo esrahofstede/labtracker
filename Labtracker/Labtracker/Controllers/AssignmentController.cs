@@ -32,6 +32,9 @@ namespace Labtracker.Controllers
             {
                 return HttpNotFound();
             }
+
+            assignment.UserAssignments = db.UserAssignments.AsEnumerable().ToList();
+
             return View(assignment);
         }
 
