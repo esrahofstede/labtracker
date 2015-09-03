@@ -44,30 +44,23 @@ namespace Labtracker.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(maxLength: 128),
                         Status = c.Int(nullable: false),
                         Assignment_Id = c.Int(),
-                        User_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Assignments", t => t.Assignment_Id)
-                .ForeignKey("dbo.Users", t => t.User_Id)
-                .Index(t => t.Assignment_Id)
-                .Index(t => t.User_Id);
-            
-            CreateTable(
-                "dbo.Users",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.Id);
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
+                .Index(t => t.UserId)
+                .Index(t => t.Assignment_Id);
             
             CreateTable(
                 "dbo.AspNetUsers",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        Surname = c.String(),
+                        Lastname = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -112,24 +105,23 @@ namespace Labtracker.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.UserAssignments", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.UserAssignments", "User_Id", "dbo.Users");
             DropForeignKey("dbo.UserAssignments", "Assignment_Id", "dbo.Assignments");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.UserAssignments", new[] { "User_Id" });
             DropIndex("dbo.UserAssignments", new[] { "Assignment_Id" });
+            DropIndex("dbo.UserAssignments", new[] { "UserId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.Users");
             DropTable("dbo.UserAssignments");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");

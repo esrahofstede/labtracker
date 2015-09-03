@@ -13,7 +13,7 @@ namespace Labtracker.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201509031115071_initial"; }
+            get { return "201509031220547_initial"; }
         }
         
         string IMigrationMetadata.Source
