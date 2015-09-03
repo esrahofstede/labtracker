@@ -18,10 +18,23 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
-    @foreach (var userassignment in Model.UserAssignments)
-    {
-       Html.DisplayFor(ua => userassignment.Status);
-    }
+
+    <h5>User assigned to this assignment</h5>
+    <table class="table-bordered">
+        <tr>
+            <th>Name</th>
+            <th>State</th>
+        </tr>
+        @foreach (var userassignment in Model.UserAssignments)
+        {
+
+            <tr>
+                <td>@Html.DisplayFor(ua => userassignment.User.Email)</td>
+                <td>@Html.DisplayFor(ua => userassignment.Status)</td>
+            </tr>
+        }
+    </table>
+    <br />
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
