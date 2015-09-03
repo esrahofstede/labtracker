@@ -29,8 +29,24 @@
         {
 
             <tr>
-                <td>@Html.DisplayFor(ua => userassignment.User.Email)</td>
-                <td>@Html.DisplayFor(ua => userassignment.Status)</td>
+                <td>@Html.DisplayFor(ua => userassignment.User.UserName)</td>
+                
+                @if (userassignment.Status.Equals(0))
+                {
+                    <td>Nog niet begonnnen</td>
+                }
+                else if (userassignment.Status.Equals(1))
+                {
+                    <td>Begonnnen</td>
+                }
+                else if (userassignment.Status.Equals(2))
+                {
+                    <td>Vastgelopen</td>
+                }
+                else if (userassignment.Status.Equals(3))
+                {
+                    <td>Klaar</td>
+                }
             </tr>
         }
     </table>
