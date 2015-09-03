@@ -26,16 +26,6 @@ namespace Labtracker.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-
-
-            context.Assignments.AddOrUpdate(
-                                a => a.Name,
-                                new Models.Assignment { Name = "Rekensom 4" },
-                                new Models.Assignment { Name = "Nederlands werkwoorden 1" },
-                                new Models.Assignment { Name = "Scheikunde 5" },
-                                new Models.Assignment { Name = "Wiskunde 6" }
-                            );
-
         }
     }
 }

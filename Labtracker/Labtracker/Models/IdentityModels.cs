@@ -27,7 +27,7 @@ namespace Labtracker.Models
         {}
 
         public DbSet<Assignment> Assignments { get; set; }
-        public DbSet<User> Users { get; set; }
+        
         public DbSet<UserAssignment> UserAssignments { get; set; }
 
         public static ApplicationDbContext Create()
