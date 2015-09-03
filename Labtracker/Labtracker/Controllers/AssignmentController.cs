@@ -61,16 +61,18 @@ namespace Labtracker.Controllers
         // GET: Assignment/Edit/5
         public ActionResult Edit(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Assignment assignment = db.Assignments.Find(id);
+            UserAssignment ua = db.UserAssignments.Where(a => a.Assignment.Id == assignment.Id  && a.User.UserName == User.Identity.Name).FirstOrDefault();
             if (assignment == null)
             {
                 return HttpNotFound();
             }
-            return View(assignment);
+            return View(ua);
         }
 
         // POST: Assignment/Edit/5
